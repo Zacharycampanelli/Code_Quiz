@@ -49,7 +49,7 @@ p {
   flex: 1;
   align-self: center;
   text-align: center;
-  width: 50%;
+  width: 60%;
 }
 
 button {
@@ -61,7 +61,7 @@ button {
   padding: 0.5em 1em 0.5em 1em;
 }
 
-/* question.html */
+/* question.html Styles */
 
 ul {
   list-style: none;
@@ -77,10 +77,55 @@ li {
   flex-direction: column;
 }
 
+/* Refactor */
+
 #question_h1 {
   align-self: flex-start;
 }
 
 .options button {
   background-color: var(--dark-purple);
+}
+
+/* enter_score.html Styles */
+/* Refactor */
+.m2 {
+  width: 50%;
+}
+
+#enter_score_h1 {
+  align-self: flex-start;
+  flex: 1;
+}
+
+.your_final_score {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.your_final_score p {
+  text-align: left;
+  align-self: flex-start;
+  flex: 1;
+  align-self: flex-start;
+}
+
+form {
+  display: flex;
+  align-items: center;
+}
+
+form label {
+  flex: 1 0 35%;
+  margin-right: 0.5em;
+}
+
+form input {
+  flex: 2 0 60%;
+  margin: 0 0.5em 0 0.5em;
+}
+form button {
+  flex: 1 0 33%;
+  margin-left: 1em;
 }
