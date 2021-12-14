@@ -55,10 +55,14 @@ p {
 button {
   flex: 1;
   align-self: center;
-  background-color: var(--purple);
+  background-color: var(--dark-purple);
   color: white;
   border-radius: 0.5em;
   padding: 0.5em 1em 0.5em 1em;
+}
+
+button:hover {
+  background-color: var(--purple);
 }
 
 /* question.html Styles */
