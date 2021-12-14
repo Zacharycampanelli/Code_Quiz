@@ -81,6 +81,14 @@ li {
   flex-direction: column;
 }
 
+.options button {
+  width: 33%;
+  text-align: left;
+}
+
+.options button:hover {
+  background-color: var(--purple);
+}
 /* Refactor */
 
 #question_h1 {
