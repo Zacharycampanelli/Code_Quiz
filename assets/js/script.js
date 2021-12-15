@@ -1,35 +1,103 @@
-var questionEl = document.querySelector("#question_h1")
-var option1El =  document.querySelector("#q1");
-var option2El =  document.querySelector("#q2");
-var option3El =  document.querySelector("#q3");
-var option4El =  document.querySelector("#q4");
+var questionEl = document.querySelector("#title");
 var pEl = document.querySelector("p");
-var mainEl = document.querySelector(".main")
+var mainEl = document.querySelector(".main");
 var beginBtnEl = document.querySelector("#begin");
-var quizEl = document.querySelector("#quiz")
-// // Question 1
-// questionEl.textContent =
-// option1El.textContent = 
+var quizEl = document.querySelector("#quiz");
 
-function startGame() {
-    
-    var choicesEl = document.createElement("ul");
-    console.log(choicesEl)
-    quizEl.appendChild(choicesEl);
-    var opt1El = document.createElement("li");
-    console.log(opt1El);
-    opt1El.innerHTML = "hi";
-    choicesEl.appendChild(opt1El);
-    questionEl.innerHTML = "1"
-    
+var questionEl = document.createElement("h2");
+var choicesEl = document.createElement("div");
+var opt1El = document.createElement("button");
+var opt2El = document.createElement("button");
+var opt3El = document.createElement("button");
+var opt4El = document.createElement("button");
+
+var questionNumber = 0;
+var check;
+
+var quizQuestions = [
+  {
+    question: "Commonly used data types do not include:",
+    answers: ["Strings", "Boolean", "Alerts", "Numbers"],
+    correct: "Alerts",
+  },
+  {
+    question: "The condition in an if/else statement is enclosed with ____.",
+    answers: ["Quotes", "Curly Brackets", "Parenthesis", "Square Brackets"],
+    correct: "Parenthesis",
+  },
+  {
+    question: "Arrays in JavaScript can be used to store ____.",
+    answers: [
+      "Numbers and Strings",
+      "Other Arrays",
+      "Booleans",
+      "All of the Above",
+    ],
+    correct: "All of the Above",
+  },
+  {
+    question:
+      "String values must be enclosed within ____ when being assigned to variables.",
+    answers: ["Commas", "Curly Brackets", "Quotes", "Parenthesis"],
+    correct: "Quotes",
+  },
+  {
+    question:
+      "A very useful tool used during development and debugging for printing content to the debugger is:",
+    answers: ["JavaScript", "Terminal/Bash", "For Loops", "console.log"],
+    correct: "console.log",
+  },
+];
+
+function buildQuizPage(questionNum) {
+  questionEl.innerHTML = quizQuestions[questionNum].question;
+  quizEl.appendChild(questionEl);
+  opt1El.textContent = quizQuestions[questionNum].answers[0];
+  choicesEl.appendChild(opt1El);
+  opt2El.textContent = quizQuestions[questionNum].answers[1];
+  choicesEl.appendChild(opt2El);
+  opt3El.textContent = quizQuestions[questionNum].answers[2];
+  choicesEl.appendChild(opt3El);
+  opt4El.textContent = quizQuestions[questionNum].answers[3];
+  choicesEl.appendChild(opt4El);
+  quizEl.appendChild(choicesEl);
+
+  if (questionNum != 0) {
+    pEl.textContent = check;
+    quizEl.appendChild(pEl);
+  }
 }
 
+function startGame() {
+  buildQuizPage(questionNumber);
+}
 
+function checkAnswer(choice) {
+  // var check;
 
-beginBtnEl.addEventListener("click", function(){
-    pEl.remove();
-    beginBtnEl.remove()
-    startGame();
+  if (choice == quizQuestions[questionNumber].correct) {
+    check = true;
+  } else {
+    check = false;
+  }
+  console.log(check);
+  questionNumber += 1;
+  console.log(questionNumber);
+  buildQuizPage(questionNumber);
+}
+
+choicesEl.addEventListener("click", function (event) {
+  var element = event.target;
+  var choice;
+  if (element.matches("button")) {
+    choice = element.textContent;
+  }
+  checkAnswer(choice);
 });
 
-    
+beginBtnEl.addEventListener("click", function () {
+  title.remove();
+  pEl.remove();
+  beginBtnEl.remove();
+  startGame();
+});
