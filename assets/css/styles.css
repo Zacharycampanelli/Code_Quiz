@@ -52,7 +52,7 @@ p {
   width: 60%;
 }
 
-button {
+#begin {
   flex: 1;
   align-self: center;
   background-color: var(--dark-purple);
@@ -61,7 +61,7 @@ button {
   padding: 0.5em 1em 0.5em 1em;
 }
 
-button:hover {
+#begin:hover {
   background-color: var(--purple);
 }
 
