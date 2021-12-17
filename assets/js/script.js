@@ -23,7 +23,9 @@ var submitButtonEl = document.createElement("button");
 var questionNumber = 0;
 var check;
 
-var timer;
+var timer = 30;
+
+var timerEl = document.querySelector("#time");
 
 var quizQuestions = [
   {
@@ -79,7 +81,21 @@ function buildQuizPage(questionNum) {
   }
 }
 
+function setTimer() {
+  var timeInterval = setInterval(function () {
+    if (timer > 0) {
+      timerEl.textContent = timer;
+      timer--;
+    } else {
+      timerEl.textContent = 0;
+      clearInterval(timeInterval);
+      enterScore();
+    }
+  }, 1000);
+}
+
 function startGame() {
+  setTimer();
   buildQuizPage(questionNumber);
 }
 
