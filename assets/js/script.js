@@ -100,7 +100,6 @@ function enterScore() {
   submitButtonEl.setAttribute("value", "submit");
   enterScoreFormEl.appendChild(submitButtonEl);
   quizEl.appendChild(enterScoreFormEl);
-
 }
 
 function checkAnswer(choice) {
@@ -121,7 +120,13 @@ function checkAnswer(choice) {
   }
 }
 
+submitButtonEl.addEventListener("click", function () {
+  //
+  window.location.replace("high_score.html");
+});
+
 choicesEl.addEventListener("click", function (event) {
+  console.log("Enter");
   var element = event.target;
   var choice;
   if (element.matches("button")) {
