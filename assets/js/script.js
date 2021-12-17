@@ -1,5 +1,6 @@
 var questionEl = document.querySelector("#title");
 var pEl = document.querySelector("p");
+pEl.id = "true_false";
 var mainEl = document.querySelector(".main");
 var beginBtnEl = document.querySelector("#begin");
 var quizEl = document.querySelector("#quiz");
@@ -11,8 +12,18 @@ var opt2El = document.createElement("button");
 var opt3El = document.createElement("button");
 var opt4El = document.createElement("button");
 
+var footerEl = document.querySelector("footer");
+
+//var enterScoreEl = document.createElement("div");
+var scorePEl = document.createElement("p");
+var enterScoreFormEl = document.createElement("form");
+var inputFieldEl = document.createElement("input");
+var submitButtonEl = document.createElement("button");
+
 var questionNumber = 0;
 var check;
+
+var timer;
 
 var quizQuestions = [
   {
@@ -64,12 +75,32 @@ function buildQuizPage(questionNum) {
 
   if (questionNum != 0) {
     pEl.textContent = check;
-    quizEl.appendChild(pEl);
+    footerEl.appendChild(pEl);
   }
 }
 
 function startGame() {
   buildQuizPage(questionNumber);
+}
+
+function enterScore() {
+  questionEl.innerHTML = "All Done!";
+  choicesEl.remove();
+
+  scorePEl.innerHTML = `Your final score is: ${timer}`;
+  quizEl.appendChild(scorePEl);
+
+  enterScoreFormEl.innerHTML = "Enter Initials: ";
+  inputFieldEl.setAttribute("type", "text");
+  inputFieldEl.setAttribute("name", "score");
+  inputFieldEl.setAttribute("placeholder", "Your Score");
+  enterScoreFormEl.appendChild(inputFieldEl);
+
+  submitButtonEl.setAttribute("type", "button");
+  submitButtonEl.setAttribute("value", "submit");
+  enterScoreFormEl.appendChild(submitButtonEl);
+  quizEl.appendChild(enterScoreFormEl);
+
 }
 
 function checkAnswer(choice) {
@@ -83,7 +114,11 @@ function checkAnswer(choice) {
   console.log(check);
   questionNumber += 1;
   console.log(questionNumber);
-  buildQuizPage(questionNumber);
+  if (questionNumber < quizQuestions.length) {
+    buildQuizPage(questionNumber);
+  } else {
+    enterScore();
+  }
 }
 
 choicesEl.addEventListener("click", function (event) {
