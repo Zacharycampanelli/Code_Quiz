@@ -1,24 +1,18 @@
-var questionEl = document.querySelector("#title");
-var pEl = document.querySelector("p");
-pEl.id = "true_false";
 var mainEl = document.querySelector(".main");
-var beginBtnEl = document.querySelector("#begin");
-var quizEl = document.querySelector("#quiz");
+var h1El = document.createElement("h1");
+var questionEl = document.createElement("div");
+var pEl = document.createElement("p");
+// var quizEl = document.querySelector("#quiz");
+// var beginBtnEl = document.querySelector("#begin");
+// var pEl = document.createElement("p");
 
-var questionEl = document.createElement("h2");
-var choicesEl = document.createElement("div");
 var opt1El = document.createElement("button");
 var opt2El = document.createElement("button");
 var opt3El = document.createElement("button");
 var opt4El = document.createElement("button");
+var optionContainerEL = document.createElement("div");
 
 var footerEl = document.querySelector("footer");
-
-//var enterScoreEl = document.createElement("div");
-var scorePEl = document.createElement("p");
-var enterScoreFormEl = document.createElement("form");
-var inputFieldEl = document.createElement("input");
-var submitButtonEl = document.createElement("button");
 
 var questionNumber = 0;
 var check;
@@ -62,34 +56,71 @@ var quizQuestions = [
   },
 ];
 
-function buildQuizPage(questionNum) {
-  questionEl.innerHTML = quizQuestions[questionNum].question;
-  quizEl.appendChild(questionEl);
-  opt1El.textContent = quizQuestions[questionNum].answers[0];
-  choicesEl.appendChild(opt1El);
-  opt2El.textContent = quizQuestions[questionNum].answers[1];
-  choicesEl.appendChild(opt2El);
-  opt3El.textContent = quizQuestions[questionNum].answers[2];
-  choicesEl.appendChild(opt3El);
-  opt4El.textContent = quizQuestions[questionNum].answers[3];
-  choicesEl.appendChild(opt4El);
-  quizEl.appendChild(choicesEl);
+function scoreFormHandler(event) {
+  event.preventDefault();
+  var scoreNameInput = document.querySelector("input[name='score']").value;
+  var score = timer;
 
-  if (questionNum != 0) {
-    pEl.textContent = check;
-    footerEl.appendChild(pEl);
+  if (!scoreNameInput) {
+    alert("You need to fill out the task form!");
+    return false;
+  }
+
+  var userScores = {
+    initials: scoreNameInput,
+    score: timer,
+  };
+
+  createScore(userScores);
+}
+
+function clearPage() {
+  while (mainEl.hasChildNodes()) {
+    mainEl.removeChild(mainEl.firstChild);
   }
 }
 
+function buildQuizPage(questionNum) {
+  //h1El.innerHTML = quizQuestions[questionNum].question;
+  questionEl.textContent = quizQuestions[questionNum].question;
+  opt1El.textContent = quizQuestions[questionNum].answers[0];
+  opt2El.textContent = quizQuestions[questionNum].answers[1];
+  opt3El.textContent = quizQuestions[questionNum].answers[2];
+  opt4El.textContent = quizQuestions[questionNum].answers[3];
+
+  mainEl.appendChild(h1El);
+  h1El.appendChild(questionEl);
+  optionContainerEL.appendChild(opt1El);
+  optionContainerEL.appendChild(opt2El);
+  optionContainerEL.appendChild(opt3El);
+  optionContainerEL.appendChild(opt4El);
+  mainEl.appendChild(optionContainerEL);
+
+  if (questionNum != 0) {
+    footerEl.textContent = check;
+    if (questionNum > 5) {
+      clearPage();
+      buildScoreFormPage();
+    }
+  }
+}
+
+function buildScoreFormPage() {
+  questionEl.textContent = "All Done!";
+  pEl.textContent = `Your final score is: ${timer}`;
+  h1El.appendChild(questionEl);
+  mainEl.appendChild(h1El);
+  mainEl.appendChild(pEl);
+}
+
 function setTimer() {
-  var timeInterval = setInterval(function () {
+  timeInterval = setInterval(function () {
     if (timer > 0) {
       timerEl.textContent = timer;
       timer--;
     } else {
       timerEl.textContent = 0;
-      clearInterval(timeInterval);
-      enterScore();
+      //enterScore();
     }
   }, 1000);
 }
@@ -99,50 +130,43 @@ function startGame() {
   buildQuizPage(questionNumber);
 }
 
-function enterScore() {
-  questionEl.innerHTML = "All Done!";
-  choicesEl.remove();
-
-  scorePEl.innerHTML = `Your final score is: ${timer}`;
-  quizEl.appendChild(scorePEl);
-
-  enterScoreFormEl.innerHTML = "Enter Initials: ";
-  inputFieldEl.setAttribute("type", "text");
-  inputFieldEl.setAttribute("name", "score");
-  inputFieldEl.setAttribute("placeholder", "Your Score");
-  enterScoreFormEl.appendChild(inputFieldEl);
-
-  submitButtonEl.setAttribute("type", "button");
-  submitButtonEl.setAttribute("value", "submit");
-  enterScoreFormEl.appendChild(submitButtonEl);
-  quizEl.appendChild(enterScoreFormEl);
-}
-
 function checkAnswer(choice) {
   // var check;
 
   if (choice == quizQuestions[questionNumber].correct) {
     check = true;
+    timer += 10;
   } else {
     check = false;
+    timer -= 10;
   }
-  console.log(check);
   questionNumber += 1;
-  console.log(questionNumber);
   if (questionNumber < quizQuestions.length) {
     buildQuizPage(questionNumber);
   } else {
-    enterScore();
+    clearPage();
+    buildScoreFormPage();
   }
 }
 
-submitButtonEl.addEventListener("click", function () {
-  //
-  window.location.replace("high_score.html");
-});
+// submitButtonEl.addEventListener("click", function (event) {
+//   event.preventDefault();
+//   var userScores = {
+//     initials: inputFieldEl.value.trim(),
+//     score: timer,
+//   };
 
-choicesEl.addEventListener("click", function (event) {
-  console.log("Enter");
+//   createScore(userScores);
+
+//   // userScores.id = scoreNumber;
+//   // highScores.push(userScores);
+//   // scoreNumber++;
+//   // saveScores();
+//   clearPage();
+//   viewHighScores();
+// });
+
+optionContainerEL.addEventListener("click", function (event) {
   var element = event.target;
   var choice;
   if (element.matches("button")) {
@@ -151,9 +175,7 @@ choicesEl.addEventListener("click", function (event) {
   checkAnswer(choice);
 });
 
-beginBtnEl.addEventListener("click", function () {
-  title.remove();
-  pEl.remove();
-  beginBtnEl.remove();
-  startGame();
-});
+// submitButtonEl.addEventListener("click", scoreFormHandler);
+// beginBtnEl.addEventListener("click", startGame);
+
+startGame();
