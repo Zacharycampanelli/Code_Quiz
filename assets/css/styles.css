@@ -20,10 +20,6 @@ nav {
   justify-content: flex-start;
 }
 
-a:link {
-  text-decoration: none;
-}
-
 .time {
   flex: 1;
   font-size: 0.75em;
@@ -38,26 +34,25 @@ a:link {
   padding-top: 1em;
   margin: auto;
   width: 65%;
+  align-self: center;
 }
 
 h1 {
-  flex: 1;
-  align-self: center;
+  text-align: center;
 }
 
 p {
-  flex: 1;
-  align-self: center;
-  text-align: center;
   width: 60%;
+  margin: 0 auto;
+  text-align: center;
 }
 
 #begin {
-  flex: 1;
   align-self: center;
   background-color: var(--dark-purple);
   color: white;
   border-radius: 0.5em;
+  margin: 0 auto;
   padding: 0.5em 1em 0.5em 1em;
 }
 
@@ -65,29 +60,9 @@ p {
   background-color: var(--purple);
 }
 
-/* question.html Styles */
-
-ul {
-  list-style: none;
-}
-
-li {
-  padding-top: 0.75em;
-  padding-inline-start: 0em;
-}
-
-.options {
-  display: flex;
-  flex-direction: column;
-}
-
-.options button {
-  width: 33%;
-  text-align: left;
-}
-
-.options button:hover {
-  background-color: var(--purple);
+/* question Styles */
+.q_h1 {
+  flex: 1;
 }
 /* Refactor */
 
@@ -149,4 +124,8 @@ footer {
 }
 .hide {
   display: none;
+}
+.flex {
+  display: flex;
+  flex-wrap: wrap;
 }

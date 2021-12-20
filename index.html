@@ -10,23 +10,29 @@
   <body>
     <header>
       <nav>
-        <a href="high_score.html" class="view_scores">View high scores</a>
-        <div id="time">\</div>
+        <div class="view_scores">View high scores</div>
+        <div id="time"></div>
       </nav>
     </header>
 
-    <div class="main"></div>
-    <!-- <div id="quiz">
-      <h1 id="title">Coding Quiz Challenge</h1>
-      <p>
-        Try to answer the following code-related questions within the time
-        limit. Keep in mind that incorrect answers will penalize your score/time
-        by ten seconds!
-      </p>
-      
-      <div type="button" id="begin">Start Quiz</div></div></div>
-    </div>
- -->
+    <main>
+      <div class="container" id="instructions">
+        <h1>Code Quiz Challenge</h1>
+        <p>
+          "Try to answer the following code-related questions within the time
+          limit. Keep in mind that incorrect answers will penalize your
+          score/time by ten seconds!"
+        </p>
+        <button id="begin">Start Quiz</button>
+      </div>
+
+      <div class="hide" id="quiz"></div>
+
+      <div class="hide" id="submitScore"></div>
+
+      <div class="hide" id="highScore"></div>
+    </main>
+
     <footer></footer>
 
     <script src="./assets/js/script.js"></script>
