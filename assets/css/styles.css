@@ -60,10 +60,24 @@ p {
   background-color: var(--purple);
 }
 
-/* question Styles */
-.q_h1 {
-  flex: 1;
+/* Quiz Styles */
+
+/* #quiz {
+  display: flex;
+  flex-direction: column;
 }
+
+.questions {
+  display: flex;
+  flex: 1;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#questionBtn {
+  padding: 1em;
+} */
 /* Refactor */
 
 #question_h1 {

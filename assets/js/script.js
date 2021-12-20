@@ -8,12 +8,10 @@ var highScorePageEl = document.querySelector("#highScore");
 var yourScoreEl = document.createElement("div");
 var beginBtnEl = document.querySelector("#begin");
 
-
 var opt1El = document.createElement("button");
 var opt2El = document.createElement("button");
 var opt3El = document.createElement("button");
 var opt4El = document.createElement("button");
-
 
 var footerEl = document.querySelector("footer");
 var enterScoreFormEl = document.createElement("form");
@@ -111,8 +109,6 @@ function createScore(userScores) {
   buildHighScorePage(userScores.score);
 }
 
-
-
 function buildQuizPage(questionNum) {
   questionEl.classList.remove("hide");
 
@@ -123,7 +119,14 @@ function buildQuizPage(questionNum) {
   opt3El.textContent = quizQuestions[questionNum].answers[2];
   opt4El.textContent = quizQuestions[questionNum].answers[3];
 
+  // opt1El.classList.add("questionBtn");
+  // opt2El.classList.add("questionBtn");
+  // opt3El.classList.add("questionBtn");
+  // opt4El.classList.add("questionBtn");
+
   var questionContainer = document.createElement("div");
+  //questionContainer.classList.add("flex");
+  //questionContainer.classList.add("questions");
   questionContainer.appendChild(h1El);
   questionContainer.appendChild(opt1El);
   questionContainer.appendChild(opt2El);
@@ -250,7 +253,6 @@ questionEl.addEventListener("click", function (event) {
   checkAnswer(choice);
   console.log(element);
 });
-
 
 // Event Listeners
 submitButtonEl.addEventListener("click", scoreFormHandler);
