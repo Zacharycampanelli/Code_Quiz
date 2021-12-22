@@ -20,13 +20,13 @@ A Dynamically created HTML quiz using Javascript
 
 ## Screenshots
 
-![Screen Shot 1](assets/images/Screenshot_1.png)
+![Screen Shot 1](assets/img/Screenshot_1.png)
 
-![Screen Shot 2](assets/images/Screenshot_2.png)
+![Screen Shot 2](assets/img/Screenshot_2.png)
 
-![Screen Shot 3](assets/images/Screenshot_3.png)
+![Screen Shot 3](assets/img/Screenshot_3.png)
 
-![Screen Shot 4](assets/images/Screenshot_4.png)
+![Screen Shot 4](assets/img/Screenshot_4.png)
 
 ## Links
 
