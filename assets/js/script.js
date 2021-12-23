@@ -33,7 +33,7 @@ var timer = 30;
 
 var timerEl = document.querySelector("#time");
 var highScores = [];
-//var sortedScores = [];
+var sortedScores = [];
 //var scoreNumber = 0;
 
 var quizQuestions = [
@@ -90,6 +90,8 @@ function scoreFormHandler(event) {
 }
 
 function createScore(userScores) {
+  console.log(userScores);
+
   scoreItemEl.className = "score-item";
 
   scoreInfoEl.className = "score-list";
@@ -100,12 +102,10 @@ function createScore(userScores) {
     userScores.score +
     "</span>";
 
-  loadScores();
-
   highScores.push(userScores);
 
   saveScore();
-
+  loadScores();
   buildHighScorePage(userScores.score);
 }
 
@@ -168,12 +168,21 @@ function buildScoreFormPage() {
 }
 
 function buildHighScorePage() {
+  var scores = loadScores();
+  console.log(scores, scores.score);
+
   scoreSubmitEl.classList.add("hide");
   footerEl.classList.add("hide");
   highScorePageEl.classList.remove("hide");
   h1El.textContent = "High Score";
 
-  scoreItemEl.appendChild(scoreInfoEl);
+  // scoreItemEl.appendChild(scoreInfoEl);
+  for (var i = 0; i < scores.length; i++) {
+    if ((i = 0)) sortedScores.append(scores.score);
+
+    console.log(sortedScores);
+  }
+
   scoreSheetEl.appendChild(scoreItemEl);
 
   goBackButtonEl.textContent = "Go back";
@@ -184,13 +193,13 @@ function buildHighScorePage() {
   highScorePageEl.appendChild(clearScores);
 }
 
-// function compareScores(a, b) {
-//   if (b > a) {
-//     var temp = highScores[i];
-//     highScores[i] = highScores[i + 1];
-//     highScores[i + 1] = temp;
-//   }
-// }
+function compareScores(a, b) {
+  if (b > a) {
+    var temp = highScores[i];
+    highScores[i] = highScores[i + 1];
+    highScores[i + 1] = temp;
+  }
+}
 
 function setTimer() {
   timeInterval = setInterval(function () {
@@ -233,11 +242,21 @@ function saveScore() {
 
 function loadScores() {
   var highScores = localStorage.getItem("highScores");
+  console.log(highScores);
 
   if (!highScores) {
     return false;
   }
+
+  for (var i = 0; i < highScores.length; i++){
+    if (sortedScores.length == 0)
+      sortedScores.append(highScores[i].score)
+    
+  }
+
   highScores = JSON.parse(highScores);
+  console.log(highScores);
+  return highScores;
 }
 
 function hide(item) {
@@ -274,6 +293,8 @@ clearScores.addEventListener("click", function () {
 
 // Not working
 navScoreLinkEl.addEventListener("click", function () {
+  startPageEl.classList.add("hide");
+  scoreSubmitEl.classList.add("hide");
   questionEl.classList.add("hide");
   buildHighScorePage();
 });
