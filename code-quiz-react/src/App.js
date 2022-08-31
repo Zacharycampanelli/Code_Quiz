@@ -31,7 +31,15 @@ function App() {
   ];
 
   const [started, setStarted] = useState(false);
+  const [score, setScore] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(0);
+
+  const isCorrect = (answer) => {
+    if (answer === quizQuestions[currentQuestion].correct) {
+      setScore(score + 20);
+      setCurrentQuestion(currentQuestion + 1);
+    }
+  };
 
   return (
     <div>
@@ -54,9 +62,9 @@ function App() {
           <div className="question-text">
             <h2>{quizQuestions[currentQuestion].question}</h2>
           </div>
-          <div className='question-answers'>
+          <div className="question-answers">
             {quizQuestions[currentQuestion].answers.map((option) => (
-              <button>{option}</button>
+              <button onClick={() => isCorrect(option)}>{option}</button>
             ))}
           </div>
         </>
