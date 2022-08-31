@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+
+import Instructions from './pages/Instructions';
+import Question from './pages/Question';
+import Highscore from './pages/Highscore';
 import './App.css';
 
 function App() {
@@ -34,40 +38,22 @@ function App() {
   const [score, setScore] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(0);
 
-  const isCorrect = (answer) => {
-    if (answer === quizQuestions[currentQuestion].correct) {
-      setScore(score + 20);
-      setCurrentQuestion(currentQuestion + 1);
-    }
-  };
-
   return (
     <div>
-      {!started && (
-        <div className="container" id="instructions">
-          <h1>Coding Quiz Challenge</h1>
-          <p>
-            "Try to answer the following code-related questions within the time limit. Keep in mind that incorrect
-            answers will penalize your score/time by ten seconds!"
-          </p>
-          <button onClick={() => setStarted(true)}>Start</button>
-        </div>
+      {!started && <Instructions setStarted={setStarted} />}
+
+      {started && currentQuestion < quizQuestions.length && (
+        <Question
+          score={score}
+          setScore={setScore}
+          currentQuestion={currentQuestion}
+          setCurrentQuestion={setCurrentQuestion}
+          quizQuestions={quizQuestions}
+        />
       )}
 
-      {started && (
-        <>
-          <div className="question-number">
-            <h2>Question {currentQuestion + 1}</h2>
-          </div>
-          <div className="question-text">
-            <h2>{quizQuestions[currentQuestion].question}</h2>
-          </div>
-          <div className="question-answers">
-            {quizQuestions[currentQuestion].answers.map((option) => (
-              <button onClick={() => isCorrect(option)}>{option}</button>
-            ))}
-          </div>
-        </>
+      {currentQuestion >= quizQuestions.length && (
+        <Highscore />
       )}
     </div>
   );
