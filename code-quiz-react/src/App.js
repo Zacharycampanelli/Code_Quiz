@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 
 import Instructions from './pages/Instructions';
 import Question from './pages/Question';
+import Submitscore from './pages/Submitscore';
 import Highscore from './pages/Highscore';
-import './App.css';
+import styles from './App.module.css';
 
 function App() {
   const quizQuestions = [
@@ -37,9 +38,10 @@ function App() {
   const [started, setStarted] = useState(false);
   const [score, setScore] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(0);
+  let [submitted, setSubmitted] = useState(false);
 
   return (
-    <div>
+    <div className={styles.container}>
       {!started && <Instructions setStarted={setStarted} />}
 
       {started && currentQuestion < quizQuestions.length && (
@@ -53,7 +55,11 @@ function App() {
       )}
 
       {currentQuestion >= quizQuestions.length && (
-        <Highscore />
+        <>
+      {!submitted ? 
+        <Submitscore score={score} setSubmitted={setSubmitted}/> :
+        <Highscore />}
+        </>
       )}
     </div>
   );

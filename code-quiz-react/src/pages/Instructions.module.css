@@ -1,0 +1,13 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.btn {
+    color: white;
+    background-color: red;
+    font-size: 1.5em;
+    margin: 0 auto;
+    padding: .3em .6em;
+
+}

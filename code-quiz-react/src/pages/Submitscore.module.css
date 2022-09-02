@@ -1,0 +1,12 @@
+.input {
+    width: 10%;
+    font-size: 1.3em;
+    padding: .3em;
+}
+
+.submitBtn {
+  background-color: lightblue;
+  margin: 0 1em;
+  font-size: 1.2em;
+  padding: 0.3em 0.6em;
+}
