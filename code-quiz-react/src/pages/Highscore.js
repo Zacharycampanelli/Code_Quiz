@@ -18,7 +18,7 @@ const Highscore = () => {
     setScores(highScores);
   }
 
-  function loadScore() {
+  function loadScore(highScores) {
     highScores = JSON.parse(localStorage.getItem('Highscores'));
     console.log(highScores);
     if (!highScores) {
@@ -31,10 +31,10 @@ const Highscore = () => {
   return (
     <div>
       Highscore
-      {scores.map((score) => {
+      {/* {scores.map((score) => {
         <li>{score}</li>;
-      })}
-      {highScores[1].score}
+      })} */}
+      {highScores[1]}
     </div>
   );
 };

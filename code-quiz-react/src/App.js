@@ -38,7 +38,7 @@ function App() {
   const [started, setStarted] = useState(false);
   const [score, setScore] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  let [submitted, setSubmitted] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   return (
     <div className={styles.container}>
@@ -57,7 +57,7 @@ function App() {
       {currentQuestion >= quizQuestions.length && (
         <>
       {!submitted ? 
-        <Submitscore score={score} setSubmitted={setSubmitted}/> :
+        <Submitscore score={score}  setSubmitted={setSubmitted}/> :
         <Highscore />}
         </>
       )}

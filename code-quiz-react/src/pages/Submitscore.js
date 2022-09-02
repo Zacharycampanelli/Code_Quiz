@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 
 import styles from './Submitscore.module.css'
 
-let highScores = [];
+
 
 
 const Submitscore = ({score, setSubmitted}) => {
-
+let highScores = [];
     useEffect(() => {
-        loadScore();
+        loadScore(highScores);
     },[])
 
     function scoreHandler(event) {
@@ -19,14 +19,14 @@ const Submitscore = ({score, setSubmitted}) => {
             inits,
             score
         }
-        
+ 
         highScores.push(userScoreData);
         
         saveScore(highScores)
         setSubmitted(true);
     }
 
-    function loadScore() {
+    function loadScore(highScores) {
         highScores = JSON.parse(localStorage.getItem('Highscores'));
     }
 
